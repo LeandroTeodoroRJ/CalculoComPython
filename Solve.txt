@@ -1,0 +1,61 @@
+****************************************************************
+                     FUNÇÃO SOLVE
+****************************************************************
+Ambiente interativo Shell Linux Gnome Terminal Ver 3.28.2
+
+A função solve é utilizada para resolver equações nela inseridas
+como parâmetros. As equações inseridas presume-se que já estão
+trabalhadas para que sejam igualadas a zero.
+
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from sympy import *
+>>> from sympy.abc import x,y,z,a,b,c
+>>> init_printing()
+>>> 
+>>> #Exemplo: x+3+1=0 
+>>> exp = x+3+1
+>>> solve(exp, x)
+[-4]
+>>>
+>>>
+>>> #Exemplo: Equação do segundo grau 
+>>> exp = 2*x**2-8*x-10
+>>> solve(exp, x)
+[-1, 5]
+>>>
+>>> 
+>>> #Exemplo: Sistema Linear
+>>> exp1 = x+y+z-6
+>>> exp2 = 3*x+2*y-z-4
+>>> exp3 = 5*x-4*y+3*z-6
+>>> resp = solve((exp1, exp2, exp3),x,y,z)
+>>> resp
+{x: 1, y: 2, z: 3}
+>>> type(resp)
+<class 'dict'>
+>>> 
+>>>
+>>> # Exemplo: Resolvendo equações literais
+>>> eqt = log((-a*pi)/sqrt(1-a**2))-b
+>>> eqt
+        ⎛   -π⋅a    ⎞
+-b + log⎜───────────⎟
+        ⎜   ________⎟
+        ⎜  ╱      2 ⎟
+        ⎝╲╱  1 - a  ⎠
+>>> solve(eqt,a)
+⎡       b      ⎤
+⎢     -ℯ       ⎥
+⎢──────────────⎥
+⎢   ___________⎥
+⎢  ╱  2⋅b    2 ⎥
+⎣╲╱  ℯ    + π  ⎦
+>>> 
+>>>
+
+
+
+
+

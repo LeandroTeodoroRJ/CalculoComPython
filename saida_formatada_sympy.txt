@@ -1,0 +1,53 @@
+************************************************************************
+                    SAÍDA FORMATADA NO SYMPY
+************************************************************************
+Ambiente interativo Shell Linux Gnome Terminal Ver 3.18.3
+
+Python 3.5.2 (default, Apr 16 2020, 17:47:17) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> # Início da sessão do Sympy
+>>> from sympy import init_session
+>>> init_session()
+Python console for SymPy 1.6 (Python 3.5.2-64-bit) (ground types: python)
+
+These commands were executed:
+>>> from __future__ import division
+>>> from sympy import *
+>>> x, y, z, t = symbols('x y z t')
+>>> k, m, n = symbols('k m n', integer=True)
+>>> f, g, h = symbols('f g h', cls=Function)
+>>> init_printing()
+
+Documentation can be found at https://docs.sympy.org/1.6/
+
+Python 3.5.2 (default, Apr 16 2020, 17:47:17) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(SymPyConsole)
+>>> #
+>>> # Quando é executado init_session() ...
+>>> # Observe que alguns símbolos são automaticamente importados
+>>> # E toda a biblioteca do sympy também é importada
+>>> # A função init_printing() configura a impressão de forma gráfica como default
+>>> #
+>>> # Exemplo:
+>>> M = 1/(x+y)
+>>> M
+  1  
+─────
+x + y
+>>>
+>>> # A função pprint também permite imprimir de forma gráfica
+>>> pprint(M, use_unicode=false) # False quando o ambiente só suporta caracteres ASCII
+  1  
+-----
+x + y
+>>> pprint(M)
+  1  
+─────
+x + y
+
+
+

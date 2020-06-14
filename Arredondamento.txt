@@ -1,0 +1,19 @@
+EXEMPLOS:
+
+Arredondamento para 2 casas decimais
+>>> from sympy import *
+>>> from sympy.abc import s
+>>> expr = -1.0*(1.232*s**2 + 56.6111111111111*s + 27.7777777777778)/s
+>>> expr
+         2                                        
+- 1.232⋅s  - 56.6111111111111⋅s - 27.7777777777778
+──────────────────────────────────────────────────
+                        s                         
+>>> 
+>>> expr.xreplace(Transform(lambda x: x.round(2), lambda x: isinstance(x, Float)))
+        2                  
+- 1.23⋅s  - 56.61⋅s - 27.78
+───────────────────────────
+             s             
+>>> 
+

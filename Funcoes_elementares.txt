@@ -1,0 +1,66 @@
+(K367_math) leandro[~]$python3
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+>>> # FUNÇÕES ELEMENTARES
+>>> 
+>>> from sympy import *
+>>> 
+>>> # *************************************************************** 
+>>> # FUNÇÕES TRIGONOMETRICAS
+>>> # Por default as funções trigonométricas estão em radianos
+>>> # Transformação:
+>>> #   x*pi/180 <---(para radianos)--- x ---(para graus)---> x*180/pi
+>>>
+>>> # Seno
+>>> sin(pi/2)  #Em radianos
+1
+>>> 
+>>> sin(90*pi/180)  #Em graus ...ou... sin(rad(90))
+1
+>>>
+>>> #Arco Seno - asin()
+>>> asin(0.5)               #Em radiano
+0.523598775598299
+>>> ANS = asin(0.5)*180/pi  #Em graus
+>>> ANS.evalf()
+30.0000000000000
+>>> 
+>>> #Cosseno - cos()
+>>> #Tangente - tan()
+>>> #Arco cosseno - acos()
+>>> #Arco tangente - atan()
+>>>
+8
+>>> #****************************************************************
+>>> #LOGARITMOS E EXPONENCIAIS
+>>> #Exponencial e²
+>>> exp(2)
+exp(2)
+>>> exp(2).evalf()
+7.38905609893065
+>>> 
+>>> #Os logaritmos por default estão na base neperiana
+>>> #para outra base deverá ser especificado
+>>> log(1000).evalf()     #Base neperiana
+6.90775527898214
+>>> log(1000,10).evalf()  #Base 10
+3.00000000000000
+>>> 
+>>> #****************************************************************
+>>> #OUTRAS FUNÇÕES
+>>> #Raiz quadrada
+>>> sqrt(64)
+>>>
+>>> #Abs - retorna o valor asoluto
+>>> Abs(-2)
+2
+>>> #Fatorial
+>>> factorial(4)
+24
+
+
+
+
+

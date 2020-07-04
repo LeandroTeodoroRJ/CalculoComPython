@@ -1,0 +1,42 @@
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> #UTILIZANDO FRAÇÕES
+>>> from sympy import *
+>>> from fractions import *
+>>> from sympy.abc import x
+>>> init_printing()
+>>> 
+>>> A = 3/(5-x**2)
+>>> A
+  3   
+──────
+     2
+5 - x 
+>>> #Convertendo em fração
+>>> B = fraction(A)
+>>> A
+  3   
+──────
+     2
+5 - x 
+>>>
+>>> B
+⎛        2⎞
+⎝3, 5 - x ⎠
+>>>
+>>> type(B)
+<class 'tuple'>
+>>>
+>>> #Retirando o numerador e denominador 
+>>> B[0]
+3
+>>> B[1]
+     2
+5 - x 
+>>> 
+
+
+
+

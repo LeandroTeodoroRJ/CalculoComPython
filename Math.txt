@@ -1,0 +1,63 @@
+# EXEMPLOS DE FUNÇÕES DA BIBLIOTECA MATH
+
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import math
+>>> 
+>>># Arredonda para o inteiro maior
+>>> math.ceil(5.2)
+6
+>>>
+>>># Arredonda para baixo	Obs:ceil(teto) - floor(chão)
+>>> math.floor(5.7)
+5
+>>># Retorna o valor do real truncado 
+>>> math.trunc(3.2)
+3
+>>> math.trunc(3.7)
+3
+>>> 
+>>> #Copia o sinal do segundo argumento para o primeiro
+>>> math.copysign(3.7, -9.2)
+-3.7
+>>> math.copysign(-3.7, 9.2)
+3.7
+>>> 
+>>># Retorna o valor absoluto
+>>> math.fabs(-3.6)
+3.6
+>>>
+>>> # Retorna o MDC (Máximo Divisor Comum)
+>>> math.gcd(18,60)
+6
+>>> 
+>>># Retorna da nase neperiana elevada ao argumento (e^x)
+>>> math.exp(2)
+7.38905609893065
+>>> 
+>>># Retorna o logaritmo do primeiro argumento utilizando o segundo como a base
+>>>#math.log(x, base)
+>>> math.log(36,6)
+2.0
+>>> 
+>>># Retorna o logaritmo do argumento na base 10
+>>> math.log10(1000)
+3.0
+>>> 
+>>># Retorna a raiz quadrada do argumento
+>>> math.sqrt(9)
+3.0
+>>> 
+>>>
+
+Funções trigonométricas: cos(x), sin(x), tan(x)
+Arcos das funções: acos(x), asin(x), atan(x)
+OBS: Os ângulos estão sempre em RADIANOS.
+Transformação:
+x*pi/180 <---(para radianos)--- x ---(para graus)---> x*180/pi
+ou utilizar...
+math.radians(x)
+math.degrees(x)
+
+>>>

@@ -151,6 +151,19 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> # Retorna o terceiro elemento, na sequência, linha 2 com coluna 1 
 >>> C[3]  
 4
-
+>>> 
+>>># Retornar as dimensões(formato) da matriz
+>>> B
+[4]
+[ ]
+[5]
+[ ]
+[6]
+>>> import numpy as np
+>>> np.shape(B)
+(3, 1)
+>>> type(_)
+<class 'tuple'>
+>>> 
 
 

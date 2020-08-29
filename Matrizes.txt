@@ -151,7 +151,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> # Retorna o terceiro elemento, na sequência, linha 2 com coluna 1 
 >>> C[3]  
 4
->>> 
+>>> # Retorna o elemento da Primeira linha com Segunda coluna 
+>>> C[0,1]
+2
+>>>
 >>># Retornar as dimensões(formato) da matriz
 >>> B
 [4]

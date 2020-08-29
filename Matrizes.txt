@@ -168,5 +168,24 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> type(_)
 <class 'tuple'>
 >>> 
+>>> # Retornar o valor médio de uma matriz ou array de valores
+>>> A
+[1  2  3]
+>>> numpy.mean(A)
+2
+>>> numpy.mean(C)
+5
+>>> 
+'''
+OBS: Pelo método de fatiamento também é possível retornar valores de uma matriz:
+Dado que i,j,k são números inteiros e sabendo que temos a formatação
+start:stop:step
+Temos que cada linha retorna:
+A[:,:] toda a matriz;
+A[i:j,k] os elementos da linha i até j da k-ésima coluna;
+A[i,j:k] os elementos da linha i-ésima linha das colunas j até k;
+A[i,:] a i-ésima linha da matriz
+A[:,j] a j-ésima coluna da matriz
+'''
 
 

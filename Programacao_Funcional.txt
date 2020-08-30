@@ -1,0 +1,65 @@
+*********************************************************************
+		PROGRAMAÇÃO FUNCIONAL COM PYTHON
+	  	  Algumas Funções e Conceitos
+*********************************************************************
+A programação funcional, dentre outros objetivos, tem o caráter de 
+substituir a linguagem imperativa(lista de instruções) por funções.
+Tal fato economiza linhas de código principalmente quando se trabalha
+com listas e loops.
+Os dois principais módulos de programação funcional com o python
+são o operator e o functools.
+Para saber mais: https://docs.python.org/3/howto/functional.html
+
+Algumas Definições:
+*First-Class Functions: São funções que podem ser tratadas como dados,
+ou seja, podem ser passadas como argumento de outras funções ou para
+variáveis.
+*High-Order Functions: São funções que recebem uma ou mais funções 
+como argumento ou retornam funções (Ex: função Map).
+
+*** Iniciando Modo Interativo ***
+Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 13:41:13) [MSC v.1900 64 bit (AMD64)] on win32
+Type "copyright", "credits" or "license()" for more information.
+
+*** Função Map ***
+A função Map aplica a cada elemento de uma lista uma dada função, retornando uma nova
+lista e não alterando a lista inicial.
+OBS: No Python3 a função Map retorna o endereço da lista e não a lista propriamente
+dita, daí a necessidade da conversão.
+>>> lista = [1,2,3,4,5]
+>>> def soma1(x):
+	return (x+1)
+>>> list(map(soma1, lista))
+[2, 3, 4, 5, 6]
+>>> 
+
+*** Função Lambda ***
+É uma função anônima, ou seja, apesar de realizar o trabalho de uma função não
+precisa ter um nome específico. 
+Sua sintaxe é: lambda <argumentos de entrada separados por ,>:<função de retorno>
+Observe o mesmo exemplo acima utilizando a função lambda
+>>> list(map(lambda x:x+1, lista))
+[2, 3, 4, 5, 6]
+
+*** Função Reduce ***
+Reduz uma lista a um único valor. A função reduce recebe uma função com dois argumentos
+que possui a regra necessária e uma lista de dados. Dentro de reduce a função retornará
+um valor, esse por conseguinte servirá como base para o próximo elemento da lista.
+>>> from functools import reduce
+>>> def soma(x,y):
+	return x+y
+>>> reduce(soma, lista)
+15
+>>> #Utilizando Lambda
+>>> reduce(lambda x,y:x+y, lista)
+15
+
+*** Função Partial ***
+Recebe uma função de dois argumentos e mais um argumento que pertence a função partial.
+Esse último é passado para a função interna. A função partial retorna uma função.
+>>> from functools import partial
+>>> soma_com_tres = partial(soma, 2)
+>>> soma_com_tres(3)
+5
+>>> 
+

@@ -1,50 +1,54 @@
 *********************************************************************
-		PROGRAMAÇÃO FUNCIONAL COM PYTHON
-	  	  Algumas Funções e Conceitos
+		PROGRAMAÃ‡ÃƒO FUNCIONAL COM PYTHON
+	  	  Algumas FunÃ§Ãµes e Conceitos
 *********************************************************************
-A programação funcional, dentre outros objetivos, tem o caráter de 
-substituir a linguagem imperativa(lista de instruções) por funções.
-Tal fato economiza linhas de código principalmente quando se trabalha
+A programaÃ§Ã£o funcional, dentre outros objetivos, tem o carÃ¡ter de 
+substituir a linguagem imperativa(lista de instruÃ§Ãµes) por funÃ§Ãµes.
+Tal fato economiza linhas de cÃ³digo principalmente quando se trabalha
 com listas e loops.
-Os dois principais módulos de programação funcional com o python
-são o operator e o functools.
+Os dois principais mÃ³dulos de programaÃ§Ã£o funcional com o python
+sÃ£o o operator e o functools.
 Para saber mais: https://docs.python.org/3/howto/functional.html
 
-Algumas Definições:
-*First-Class Functions: São funções que podem ser tratadas como dados,
-ou seja, podem ser passadas como argumento de outras funções ou para
-variáveis.
-*High-Order Functions: São funções que recebem uma ou mais funções 
-como argumento ou retornam funções (Ex: função Map).
+Algumas DefiniÃ§Ãµes:
+*First-Class Functions: SÃ£o funÃ§Ãµes que podem ser tratadas como dados,
+ou seja, podem ser passadas como argumento de outras funÃ§Ãµes ou para
+variÃ¡veis.
+*High-Order Functions: SÃ£o funÃ§Ãµes que recebem uma ou mais funÃ§Ãµes 
+como argumento ou retornam funÃ§Ãµes (Ex: funÃ§Ã£o Map).
 
 *** Iniciando Modo Interativo ***
 Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 13:41:13) [MSC v.1900 64 bit (AMD64)] on win32
 Type "copyright", "credits" or "license()" for more information.
 
-*** Função Map ***
-A função Map aplica a cada elemento de uma lista uma dada função, retornando uma nova
-lista e não alterando a lista inicial.
-OBS: No Python3 a função Map retorna o endereço da lista e não a lista propriamente
-dita, daí a necessidade da conversão.
+*** FunÃ§Ã£o Map ***
+A funÃ§Ã£o Map aplica a cada elemento de uma lista uma dada funÃ§Ã£o, retornando uma nova
+lista e nÃ£o alterando a lista inicial.
+OBS: No Python3 a funÃ§Ã£o Map retorna o endereÃ§o da lista e nÃ£o a lista propriamente
+dita, daÃ­ a necessidade da conversÃ£o.
 >>> lista = [1,2,3,4,5]
 >>> def soma1(x):
 	return (x+1)
 >>> list(map(soma1, lista))
 [2, 3, 4, 5, 6]
->>> 
 
-*** Função Lambda ***
-É uma função anônima, ou seja, apesar de realizar o trabalho de uma função não
-precisa ter um nome específico. 
-Sua sintaxe é: lambda <argumentos de entrada separados por ,>:<função de retorno>
-Observe o mesmo exemplo acima utilizando a função lambda
+*** FunÃ§Ã£o Lambda ***
+Ã‰ uma funÃ§Ã£o anÃ´nima, ou seja, apesar de realizar o trabalho de uma funÃ§Ã£o nÃ£o
+precisa ter um nome especÃ­fico. 
+Sua sintaxe Ã©: lambda <argumentos de entrada separados por ,>:<funÃ§Ã£o de retorno>
+Observe o mesmo exemplo acima utilizando a funÃ§Ã£o lambda
 >>> list(map(lambda x:x+1, lista))
 [2, 3, 4, 5, 6]
+>>>
+*Declarando uma funÃ§Ã£o simples porÃ©m utilizando o lambda
+>>> multiplicar = lambda x,y:x*y
+>>> multiplicar(2,3)
+6
 
-*** Função Reduce ***
-Reduz uma lista a um único valor. A função reduce recebe uma função com dois argumentos
-que possui a regra necessária e uma lista de dados. Dentro de reduce a função retornará
-um valor, esse por conseguinte servirá como base para o próximo elemento da lista.
+*** FunÃ§Ã£o Reduce ***
+Reduz uma lista a um Ãºnico valor. A funÃ§Ã£o reduce recebe uma funÃ§Ã£o com dois argumentos
+que possui a regra necessÃ¡ria e uma lista de dados. Dentro de reduce a funÃ§Ã£o retornarÃ¡
+um valor, esse por conseguinte servirÃ¡ como base para o prÃ³ximo elemento da lista.
 >>> from functools import reduce
 >>> def soma(x,y):
 	return x+y
@@ -54,9 +58,9 @@ um valor, esse por conseguinte servirá como base para o próximo elemento da list
 >>> reduce(lambda x,y:x+y, lista)
 15
 
-*** Função Partial ***
-Recebe uma função de dois argumentos e mais um argumento que pertence a função partial.
-Esse último é passado para a função interna. A função partial retorna uma função.
+*** FunÃ§Ã£o Partial ***
+Recebe uma funÃ§Ã£o de dois argumentos e mais um argumento que pertence a funÃ§Ã£o partial.
+Esse Ãºltimo Ã© passado para a funÃ§Ã£o interna. A funÃ§Ã£o partial retorna uma funÃ§Ã£o.
 >>> from functools import partial
 >>> soma_com_tres = partial(soma, 2)
 >>> soma_com_tres(3)

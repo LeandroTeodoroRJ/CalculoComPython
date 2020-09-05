@@ -72,3 +72,15 @@ plt.imshow(mt2, origin="lower")     #Para alterar o ponto de origem para baixo
 
 plt.show()	#Mostra a tela de plotagem (Obrigatório)
 
+'''
+OBS:
+1 - É possível salvar o gráfico usando plt.savefig antes de plt.show().
+Sintaxe:plt.savefig('<nome do arquivo>', dpi=<resolução>)
+Exemplo:plt.savefig('Grafico.png', dpi=300)
+Nem todos os formatos de figura podem ser suportados.
+
+2 - Existem outros tipos de gráficos que podem ser plotados, para saber mais:
+https://matplotlib.org/tutorials/introductory/sample_plots.html 
+ou 
+http://pbx-brasil.com/Pesquisa/Ferramentas/ProgramandoPython/matplot/matplot.html
+'''

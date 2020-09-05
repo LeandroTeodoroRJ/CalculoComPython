@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 # ou import pylab as plt
 
-eixo_x = np.arange(0,10)	#Cria um array de 0 a 9
+eixo_x = np.arange(0,10)	#Cria um array de 0 a 9, aqui também podemos usar np.linspace(0,10)
 eixo_y = 2*eixo_x
 curva2 = 10/(eixo_x+1)
 

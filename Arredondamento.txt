@@ -31,3 +31,4 @@ Arredondamento para 2 casas decimais
              s             
 >>> 
 
+OBS: Mais arredondamentos podem ser encontrados na biblioteca Math.

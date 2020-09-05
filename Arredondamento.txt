@@ -1,5 +1,19 @@
-EXEMPLOS:
+** ARREDONDAMENTOS COM PYTHON **
 
+VALORES MÁXIMOS E MÍNIMOS
+As funções abaixo informam os valores máximos e mínimos para a sua
+arquitetura. O valor máximo quando ultrapassado é aproximado para o
+infinito, podendo ocasionar erros em cálculos. O valor mínimo quando
+ultrapassado no limite inferior é aproximado para zero(o python não
+enxerga)
+>>> import sys
+>>> sys.float_info.max
+1.7976931348623157e+308
+>>> sys.float_info.epsilon
+2.220446049250313e-16
+
+
+EXEMPLOS:
 Arredondamento para 2 casas decimais
 >>> from sympy import *
 >>> from sympy.abc import s

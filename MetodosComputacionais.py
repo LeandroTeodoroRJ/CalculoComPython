@@ -86,7 +86,7 @@ class bissecao(object):        #Nome da classe(classe Pai)
         plt.show()
 
     def retorna_iteracao(self, tol):  #Retorna o número provável de iterações
-        return floor(abs((log((self._limite_sup - self._limite_inf) / 2 * tol, 10) / 0.301).evalf()))
+        return floor(abs((log((self._limite_sup - self._limite_inf) / tol, 2)).evalf()))
 
     def calcula_zero(self, tol, N):
         self.i = 1  # Esse seria o início da iteração

@@ -54,6 +54,12 @@ Type "help", "copyright", "credits" or "license" for more information.
 ⎣╲╱  ℯ    + π  ⎦
 >>> 
 >>>
+>>> # Solve com substituição dupla
+>>> exp3 = a+b+c
+>>> exp3.subs([(a, 1),(b, 2)])
+c + 3
+>>> solve(exp3.subs([(a, 1),(b, 2)]), c)
+[-3]
 
 
 

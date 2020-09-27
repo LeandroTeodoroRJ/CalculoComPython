@@ -33,3 +33,16 @@ print(cancel(FT_simp))
 #A função expand() expande a expressão fatorada
 FT_exp = expand((x+3)*(x-2))
 print(FT_exp)
+
+#Cast string para simbólico(sympy)
+>>> from sympy.abc import x
+>>> a = x
+>>> type(a)
+<class 'sympy.core.symbol.Symbol'>
+>>> from sympy.parsing.sympy_parser import parse_expr
+>>> parse_expr('x')
+x
+>>> type(_)
+<class 'sympy.core.symbol.Symbol'>
+
+

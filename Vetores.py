@@ -1,5 +1,6 @@
-from sympy import *
+# MÓDULO DE OPERAÇÕES COM VETORES
 
+from sympy import *
 
 def escalar(v1, v2):
     if (len(v1) == 2 and len(v2) == 2):

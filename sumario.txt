@@ -16,6 +16,7 @@ Matplotlib.py
 Matplolib_Markers.pdf
 Derivadas.py
 Integral.txt
+Programacao_funcional.txt
 Importar_Dados_de_arquivo.py (Anexos: dados.txt , planilha.csv)
 MetodosComputacionais.py
 Exemplos_Metodos_Computacionais.py

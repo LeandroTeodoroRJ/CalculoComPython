@@ -1,0 +1,30 @@
+CURSO DE CÁLCULO COM PYTHON
+
+Sugestão de Leitura.
+
+** Sumário **
+Pacotes_Necessarios.txt
+Variaveis_Simbolicas.py
+saida_formatada_sympy.txt
+Funcoes_elementares.txt
+Fracoes.txt
+Math.txt
+Arredondamento.txt
+Matrizes.txt
+Solve.txt
+Matplotlib.py
+Matplolib_Markers.pdf
+Derivadas.py
+Integral.txt
+Importar_Dados_de_arquivo.py (Anexos: dados.txt , planilha.csv)
+MetodosComputacionais.py
+Exemplos_Metodos_Computacionais.py
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 # EXEMPLO DE USO DA BIBLIOTECA DE MÉTODOS COMPUTACIONAIS
 
 import MetodosComputacionais as mc
-#import numpy as np
+import numpy as np
 #import matplotlib.pyplot as plt
 from sympy import *
 
@@ -35,3 +35,22 @@ print(exemp1.retorna_iteracao(0.1))
 #Passo 5 - Calcular o Zero da função
 print("Calculando o Zero.")
 print(exemp1.calcula_zero(0.1, 5))
+
+#MÉTODO DE JACOBI PARA SISTEMAS LINEARES
+print('\nResolução de Sistemas Lineares Pelo método de Jacobi')
+
+#Declarando as matrizes
+A = np.array ([[-3,1,1],[2,5,1],[2,3,7]])
+b = np.array ([[2],[5],[-17]])
+x0 = np.array ([[1],[1],[-1]])
+
+#Declarando a tolerência e o número máximo de iterações
+TOL = 10**-2
+N = 50
+ex1 = mc.Jacobi(A, b, x0)
+print('Matriz resultado')
+print(ex1.calcula(TOL, N))
+print('\nRetornando o erro')
+print(ex1.retorna_erro())
+print('\nRetornando o número de iterações que foi necessário')
+print(ex1.retorna_iteração())

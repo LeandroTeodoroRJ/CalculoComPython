@@ -38,11 +38,16 @@ print(exemp1.calcula_zero(0.1, 5))
 
 #MÉTODO DE JACOBI PARA SISTEMAS LINEARES
 print('\nResolução de Sistemas Lineares Pelo método de Jacobi')
-
+'''
+Sistema em questão:
+(I)     -3.x1+x2+x3=2
+(II)    2.x1+5.x2+x3=5
+(III)   2.x1+3.x2+7.x3=-17
+'''
 #Declarando as matrizes
-A = np.array ([[-3,1,1],[2,5,1],[2,3,7]])
-b = np.array ([[2],[5],[-17]])
-x0 = np.array ([[1],[1],[-1]])
+A = np.array ([[-3,1,1],[2,5,1],[2,3,7]])   #Matriz dos coeficientes
+b = np.array ([[2],[5],[-17]])              #Matriz dos termos isolados
+x0 = np.array ([[1],[1],[-1]])              #Vetor inicial (arbitrado)
 
 #Declarando a tolerência e o número máximo de iterações
 TOL = 10**-2

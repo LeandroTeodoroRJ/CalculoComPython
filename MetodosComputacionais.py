@@ -1,7 +1,8 @@
 #***********************************************************************************************
 #                               MÓDULO MÉTODOS COMPUTACIONAIS
 #***********************************************************************************************
-'''
+
+header = '''
 File name: MetodosComputacionais.py
 Package folder: <nome da pasta do código>
 Description: Arquivo com os algoritmos mais usados em cálculo numérico
@@ -54,6 +55,10 @@ Code Structs Comments:
         gera_grafico(self) :: [void] -> [void]  --Gera o gráfico da função dentro do intervalo
         integral(self) :: [void] -> [float]  --Retorna o valor da integral definida dentros dos limites especificados
 '''
+
+def help():
+    print(header)
+
 
 #** MÓDULOS NECESSÁRIOS **
 import numpy as np

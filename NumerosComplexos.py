@@ -9,7 +9,7 @@ Description: Arquivo com os algoritmos para manipulação de números complexos
 Homepage: https://github.com/LeandroTeodoroRJ/CalculoComPython
 Stable: Yes
 Version: 1.0
-Last Update: 27.10.20
+Last Update: 28.10.20
 Current: Yes
 Maintainer: leandroteodoro.rj@gmail.com
 Depends: math
@@ -23,6 +23,10 @@ Links: No
 Files:  No
 Other Notes: No
 Code Structs Comments:
+    FUNCTIONS:
+        help(void): --Retorna instruções de ajuda do módulo
+        exemplos(void): --Retorna exemplos de uso do módulo
+        
     CLASSE COMPLEXO
         init(self, a, b, mod, arg) :: a, b, mod, arg[float] -> [void] --Cria um objeto do tipo número comlexo
             -- Criar utilizando notação retangular ou polar
@@ -104,11 +108,73 @@ class Complexo(object):
         self._tmp = comp.polar()
         self._rm = self._mod * self._tmp[1]
         self._rarg = self._arg + self._tmp[2]
-        return Complexo(a=self._rm, b=self._rarg)
+        return Complexo(mod=self._rm, arg=self._rarg)
 
     def div(self, comp):
         self._tmp = comp.polar()
         self._rm = self._mod / self._tmp[1]
         self._rarg = self._arg - self._tmp[2]
-        return Complexo(a=self._rm, b=self._rarg)
+        if (self._rarg < 0):
+            self._rarg = 360 + self._rarg
+        return Complexo(mod=self._rm, arg=self._rarg)
 
+
+
+extext = '''
+EXEMPLOS DE USO DA BIBLIOTECA NÚMEROS COMPLEXOS
+
+Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 13:41:13) [MSC v.1900 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import NumerosComplexos as nc
+
+Calcule
+a) 3L25 + (2+3j)
+>>> ex1 = nc.Complexo(mod=3, arg=25)
+>>> ex2 = nc.Complexo(a=2, b=3)
+>>> resp = ex1.sum(ex2)
+>>> resp.show()
+('ret', 4.718923361109949, 4.267854785222099, 'polar', 6.362611268635888, 42.126594767168)
+
+b) 2L142 + 2L22
+>>> ex1 = nc.Complexo(mod=2, arg=142)
+>>> ex2 = nc.Complexo(mod=3, arg=22)
+>>> resp = ex1.sum(ex2)
+>>> resp.retangular()
+('ret', 1.2055300564869185, 2.355142730899053)
+
+c) 3L298 + 2L307
+>>> ex1 = nc.Complexo(None, None, 3, 298)
+>>> ex2 = nc.Complexo(None, None, 2, 307)
+>>> resp = ex1.sum(ex2)
+>>> resp.show()
+('ret', 2.612044734661767, -4.2461137986713675, 'polar', 4.9852041168984895, 301.5982193413364)
+
+d) (2+3j) + (-3+4j)
+>>> ex1 = nc.Complexo(2,3)
+>>> ex2 = nc.Complexo(-3,4)
+>>> resp = ex1.sum(ex2)
+>>> resp.retangular()
+('ret', -1, 7)
+
+d) (2+3j) * (-3+4j)
+>>> ex1 = nc.Complexo(2,3)
+>>> ex1.polar()
+('polar', 3.605551275463989, 56.309932474020215)
+>>> ex2 = nc.Complexo(-3,4)
+>>> ex2.polar()
+('polar', 5.0, 126.86989764584402)
+>>> resp = ex1.multi(ex2)
+>>> resp.polar()
+('polar', 18.027756377319946, 183.17983011986422)
+
+g) (-2-3j) / (3-5j)
+>>> ex1 = nc.Complexo(-2,-3)
+>>> ex2 = nc.Complexo(3,-5)
+>>> resp = ex1.div(ex2)
+>>> resp.polar()
+('polar', 0.6183469424008422, 295.34617594194674)
+
+'''
+
+def exemplos():         #Imprime o cabeçalho
+    print(extext)

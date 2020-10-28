@@ -1,0 +1,8 @@
+
+*** OUTRAS UTILIZDADES ***
+
+*** Adicionando uma pasta ao Path do sistema de modo temporário ***
+import sys
+sys.path.insert(0, r'C:\DADOS\Informatica\modulos')
+#Caso o módulo estivesse na raiz do projeto as linhas
+#acima não seriam necessárias

@@ -1,4 +1,4 @@
-CURSO DE CÁLCULO COM PYTHON
+﻿CURSO DE CÁLCULO COM PYTHON
 
 Sugestão de Leitura.
 
@@ -20,7 +20,7 @@ Integral.txt
 Programacao_funcional.txt
 Importar_Dados_de_arquivo.py (Anexos: dados.txt , planilha.csv)
 MetodosComputacionais.py
-Exemplos_Metodos_Computacionais.py
+Metodos_Computacionais.py
 
 
 

@@ -9,19 +9,19 @@ Description: Arquivo com os algoritmos mais usados em cálculo numérico
 Homepage: https://github.com/LeandroTeodoroRJ/CalculoComPython
 Stable: Yes
 Version: 1.0
-Last Update: 28.10.20
+Last Update: 30.10.20
 Current: Yes
 Maintainer: leandroteodoro.rj@gmail.com
+Contributor(special thanks): Prof. Eric Amâncio (UNESA) 
 Depends: numpy, sympy, matplotlib
-Architecture: All
+Architecture: PC-32, PC-64
 Compile/Interpreter: Python 3.5.4
 Access: Public
 Changelog: No
 Readme: No
 Documents:	No
 Links: No
-Files:  * Arquivo Exemplo de Uso	                Exemplos_MetodosComputacionais.py
-        * Características de funcionamento          Caracteristicas_e_Limitacoes.txt
+Files:  * Características de funcionamento          Caracteristicas_e_Limitacoes.txt
         e limitações dos métodos compu-
         tacionais.
 Other Notes: No
@@ -311,5 +311,5 @@ print('\nRetornando o número de iterações que foi necessário')
 print(ex1.retorna_iteração())
 '''
 
-def exemplos():         #Imprime o cabeçalho
+def exemplos():         #Imprime os exemplos
     print(extext)

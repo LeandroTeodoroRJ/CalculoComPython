@@ -9,7 +9,7 @@ Description: Arquivo com os algoritmos para manipulação de números complexos
 Homepage: https://github.com/LeandroTeodoroRJ/CalculoComPython
 Stable: Yes
 Version: 1.0
-Last Update: 28.10.20
+Last Update: 03.11.20
 Current: Yes
 Maintainer: leandroteodoro.rj@gmail.com
 Depends: math
@@ -41,6 +41,11 @@ Code Structs Comments:
         sub(self, comp) :: comp[Complexo] -> [Complexo]  --Subtrai dois números complexos
         multi(self, comp) :: comp[Complexo] -> [Complexo]  --Multiplica dois números complexos
         div(self, comp) :: comp[Complexo] -> [Complexo]  --Divide dois números complexos
+        real(self) :: [void] -> [float]  --Retorna a parte real do complexo 
+        img(self) :: [void] -> [float]  --Retorna a parte imaginária do complexo
+        mod(self) :: [void] -> [float]  --Retorna o módulo de um número complexo
+        arg(self) :: [void] -> [float]  --Retorna o argumanto de um número complexo
+        
 '''
 
 #Bibliotecas necessárias
@@ -117,6 +122,18 @@ class Complexo(object):
         if (self._rarg < 0):
             self._rarg = 360 + self._rarg
         return Complexo(mod=self._rm, arg=self._rarg)
+
+    def real(self):
+        return self._a
+
+    def img(self):
+        return self._b
+
+    def mod(self):
+        return self._mod
+
+    def arg(self):
+        return self._arg
 
 
 

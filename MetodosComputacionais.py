@@ -58,6 +58,18 @@ Code Structs Comments:
                                                                             os pontos devem pertencer a lista ex.
         gera_grafico(self) :: [void] -> [void]  --Gera o gráfico da função dentro do intervalo
         integral(self) :: [void] -> [float]  --Retorna o valor da integral definida dentros dos limites especificados
+        get_valores_x(self) :: [void] -> [numpy array]  --Retorna os valores do eixo X
+        get_valores_y(self) :: [void] -> [numpy array]  --Retorna os valores do eixo Y
+
+    CLASSE INTERPOLAÇÃO POLINOMIAL
+        init(self, objDados) :: objDados[Dados] -> [void]  --Gera um objeto do tipo Interpolação Polinomial
+        regressao(self) :: [void] -> [void]  --Faz os cálculos necessários para a regressão
+        get_poli(self) ::  [void]  -> [symbol]   --Retorna o polinômio em x
+        matriz_dd(self) :: [void] -> [numpy array]  --Retorna matriz dos coeficientes do polinômio não simplificado
+        poli_x(self)  :: [void]  -> [symbol]   --Retorna o polinômio simplificado em 'x'
+        matriz(self) :: [void] -> [numpy array]  --Retorna matriz da Diferença Dividida
+        gera_grafico(self) :: [void] -> [void]  --Gera o gráfico do polinômio 
+        
 '''
 
 def help():
@@ -203,6 +215,12 @@ class Dados(object):
         plt.grid()
         plt.show()
 
+    def get_valores_x(self):
+        return self._ex
+
+    def get_valores_y(self):
+        return self._ey
+
 
 #** MÉTODO DE JACOBI **
 class Jacobi(object):
@@ -246,6 +264,126 @@ class Jacobi(object):
     def retorna_iteração(self):
         return self._it
 
+
+
+#** MÉTODO DE INTERPOLAÇÃO POLINOMIAL **
+class InterpolacaoPolinomial(object):
+
+#** Constructor ***
+    def __init__(self, objDados):
+        # Insira os dados de entrada
+        self._xi = objDados.get_valores_x()
+        self._fi = objDados.get_valores_y()
+
+# ** Destructor **
+    def __del__(self):
+        pass
+
+
+# ** Médodos de Classe **
+    def regressao(self):
+        # PROCEDIMIENTO
+        # Tabela para armazenar os resultados do método
+        self._titulo = ['i', 'xi', 'fi']
+
+        self._n = len(self._xi)  # Comprimento da linha xi
+
+        self._ki = np.arange(0, self._n, 1)  # Criando uma matriz linha com 4 elementos
+
+        self._matriz = np.concatenate(([self._ki], [self._xi], [self._fi]), axis=0)  # Organizando todos os valore
+        # em uma matriz, matriz linha
+        # compõe uma linha.
+
+        self._matriz = np.transpose(self._matriz)  # Transponha a matriz para obter o formato onde
+        # onde "i", "xi" e "fi" cada um represente uma
+        # coluna.
+
+        self._dd = np.zeros(shape=(self._n, self._n), dtype=float)  # Criando uma matriz vazia a qual
+        # atribuiremos valores futuros
+
+        self._matriz = np.concatenate((self._matriz, self._dd), axis=1)  # Agora estamos agrupando uma matriz
+        # quadrada vazia "n x n" a matriz
+        # anterior. Como se trata junção de
+        # matrizes axis = 1.
+
+        # Calcula matriz, inicia-se na coluna 4 (lembre-se que 0 é a primeira coluna)
+        # Esse valor precisa ser mudado quando estamos trabalhando com polinômio maior
+        [self._n, self._m] = np.shape(self._matriz)
+        self._coluna = self._n - 1
+        self._j = 3
+        while (self._j < self._m):
+            # Adicionar título para cada coluna (utilizamos j - 2 pq iniciamos com
+            # j = 3)
+            self._titulo.append('self._dd' + str(self._j - 2))
+
+            self._espassar = self._j - 2  # Servirá para adicionar os valores nas colunas vazias
+            self._i = 0
+            while (self._i < self._coluna):
+                self._numerador = self._matriz[self._i + 1, self._j - 1] - self._matriz[self._i, self._j - 1]
+                self._denominador = self._xi[self._i + self._espassar] - self._xi[self._i]
+                self._matriz[self._i, self._j] = self._numerador / self._denominador
+                self._i = self._i + 1
+            self._coluna = self._coluna - 1
+            self._j = self._j + 1
+
+
+        # POLINOMIO com diferencias divididas
+        # caso: pontos equidistantes no eixo x
+        self._h = self._xi[1] - self._xi[0]
+
+        self._dd = self._matriz[0, 3:]  # pega os valores da primeira linha e quarta coluna
+
+        self._n = len(self._dd)
+
+
+        # Expressão do polinômio com o Sympy
+        #x = sym.Symbol('x')
+        self._polinomio = self._fi[0]
+        for self._j in range(1, self._n, 1):
+            self._fator = self._dd[self._j - 1]
+            self._termino = 1
+            for self._k in range(0, self._j, 1):
+                self._termino = self._termino * (x - self._xi[self._k])
+            self._polinomio = self._polinomio + self._termino * self._fator
+        # Simplifique multiplicando (x-self._xi)
+        self._polisimple = self._polinomio.expand()
+
+        # polinômio para avaliação numérica
+        self._px = lambdify(x, self._polisimple)
+
+        # Pontos para o gráfico
+        self._amostra = 101
+        self._a = np.min(self._xi)
+        self._b = np.max(self._xi)
+        self._pxi = np.linspace(self._a, self._b, self._amostra)
+        self._pfi = self._px(self._pxi)
+
+
+    def get_poli(self):
+        return self._polinomio
+
+    def poli_x(self):
+        return self._polisimple
+
+    def matriz_dd(self):
+        #print([self._titulo])
+        return self._dd
+
+    def matriz(self):
+        return self._matriz
+
+
+    def gera_grafico(self):
+        # Gráfico
+        plt.plot(self._xi, self._fi, 'o', label='Pontos')
+        ##for i in range(0,self._n,1):
+        ##    plt.axvline(self._xi[i],ls='--', color='yellow')
+        plt.plot(self._pxi, self._pfi, label='Interpolação Polinomial')
+        plt.legend()
+        plt.xlabel('xi')
+        plt.ylabel('fi')
+        plt.title('Interpolação Diferenças Divididas de Newton')
+        plt.show()
 
 extext = '''
 # EXEMPLO DE USO DA BIBLIOTECA DE MÉTODOS COMPUTACIONAIS
@@ -309,6 +447,49 @@ print('\nRetornando o erro')
 print(ex1.retorna_erro())
 print('\nRetornando o número de iterações que foi necessário')
 print(ex1.retorna_iteração())
+
+# **** MÉTODO DA INTERPOLAÇÃO POLINOMIAL ****
+import numpy as np
+import MetodosComputacionais as mc
+
+# Insirindo os dados de entrada (pontos)
+xi = np.array([-1, 0, 1, 3])    #Pontos no eixo x
+fi = np.array([3, 1, 3, 43])    #Pondos do eixo y (imagem)
+
+pontos = mc.Dados(xi, fi)
+polinomial = mc.InterpolacaoPolinomial(pontos)
+
+polinomial.regressao()
+
+# Dados de Saída
+print('Matriz Diferenças Divididas:')
+mtzdd = polinomial.matriz()
+print('[[i, xi, fi, dd1, dd2, dd3, dd4]]')
+print(mtzdd)
+print(type(mtzdd))
+
+print('')
+print('Polinomio não simplificado: ')
+poli = polinomial.get_poli()
+print(poli)
+print(type(poli))
+
+print('')
+print('Matriz dos coeficientes do polinômio não simplificado:')
+print('dd: ')
+mdd = polinomial.matriz_dd()
+print(mdd)
+print(type(mdd))
+
+print('')
+print('polinomio simplificado: ')
+poli = polinomial.poli_x()
+print(poli)
+print(type(poli))
+
+#Gera o gráfico do polinimio
+polinomial.gera_grafico()
+
 '''
 
 def exemplos():         #Imprime os exemplos

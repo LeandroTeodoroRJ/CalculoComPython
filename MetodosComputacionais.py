@@ -9,7 +9,7 @@ Description: Arquivo com os algoritmos mais usados em cálculo numérico
 Homepage: https://github.com/LeandroTeodoroRJ/CalculoComPython
 Stable: Yes
 Version: 1.0
-Last Update: 30.10.20
+Last Update: 20.11.20
 Current: Yes
 Maintainer: leandroteodoro.rj@gmail.com
 Contributor(special thanks): Prof. Eric Amâncio (UNESA) 
@@ -44,16 +44,24 @@ Code Structs Comments:
         retorna_iteracao(self, tol) :: --Método não implementado
 
     CLASSE JACOBI
-        __init__(self, A, b, x0) :: A, b, x0[numpy array] -> [void]  --Cria o objeto com as respectivas matrizes de Jacobi
+        init(self, A, b, x0) :: A, b, x0[numpy array] -> [void]  --Cria o objeto com as respectivas matrizes de Jacobi
+                                                                   Onde:
+                                                                   A: Matriz dos coeficientes
+                                                                   b: Matriz dos termos independentes
+                                                                   x0: Matriz de iteração inicial
         calcula(self, TOL, N) :: TOL[float], N[int] -> [numpy array]  --Calcula o sist. linear onde TOL é a tolerância
                                                                         e N é o número máximo de iterações
         retorna_erro(self) :: [void] -> [float]  --Retorna o erro depois que calculado a resulução do sistema
         retorna_iteração(self) :: [void] -> [int] --Retorna o número de iterações que foi necessário
+        pivotemanto_parcial(self) :: [void] -> [void]  --Executa o pivoteamento parcial que gera outro sistema linear 
+                                                         equivalente quando o original não converge para uma solução
+        retorna_matriz_A(self) :: [void] -> [np.array]  --Retorna a matriz A 
+        retorna_matriz_b(self) :: [void] -> [np.array]  --Retorna a matriz b
 
     CLASSE DADOS
-        __init__(self, ex, ey) :: ex[list], ey[list] -> [void]  --Cria um objeto a partir de pontos coletados, onde
-                                                                  ex são os ponto do eixo x, e
-                                                                  ey são os pontos do eixo y.
+        init(self, ex, ey) :: ex[np.array], ey[np.array] -> [void]  --Cria um objeto a partir de pontos coletados, onde
+                                                                      ex: São os ponto do eixo x, e
+                                                                      ey: São os pontos do eixo y.
         set_limites(self, inf, sup) :: inf[float], sup[float] -> [void]   --Define os Limites Superiores e Inferiores,
                                                                             os pontos devem pertencer a lista ex.
         gera_grafico(self) :: [void] -> [void]  --Gera o gráfico da função dentro do intervalo
@@ -264,7 +272,43 @@ class Jacobi(object):
     def retorna_iteração(self):
         return self._it
 
+    def pivoteamento_parcial(self):
+        # Acesse as linhas
+        for self._i in range(len(self._A)):
+            # Verifique qual o maior pivô na na coluna de análise
+            self._pivo = np.fabs(self._A[self._i][self._i])
+            self._linhapivo = self._i
+            for self._j in range(self._i + 1, len(self._A)):
+                if np.fabs(self._A[self._j][self._i]) > self._pivo:
+                    self._pivo = np.fabs(self._A[self._j][self._i])
+                    self._linhapivo = self._j
+            # Permute as linhas
+            if self._linhapivo != self._i:
+                self._linhaAuxiliar = self._A[self._i]
+                self._A[self._i] = self._A[self._linhapivo]
+                self._A[self._linhapivo] = self._linhaAuxiliar
 
+                self._bAuxiliar = self._b[self._i]
+                self._b[self._i] = self._b[self._linhapivo]
+                self._b[self._linhapivo] = self._bAuxiliar
+            # Eliminação Gaussiana
+            for self._m in range(self._i + 1, len(self._A)):
+                self._multiplicador = self._A[self._m][self._i] / self._A[self._i][self._i]
+                for self._n in range(self._i, len(self._A)):
+                    self._A[self._m][self._n] -= self._multiplicador * self._A[self._i][self._n]
+                self._b[self._m] -= self._multiplicador * self._b[self._i]
+        # Printar matriz escalonada e o vetor b escalonado
+        self._A_resp = np.empty((len(self._A), len(self._A)))
+        for self._k in range(len(self._A)):
+            self._A_resp[self._k] = self._A[self._k]
+        self._A = self._A_resp
+        print('\n')
+
+    def retorna_matriz_A(self):
+        return self._A
+
+    def retorna_matriz_b(self):
+        return self._b
 
 #** MÉTODO DE INTERPOLAÇÃO POLINOMIAL **
 class InterpolacaoPolinomial(object):
@@ -425,7 +469,7 @@ print("Calculando o Zero.")
 print(exemp1.calcula_zero(0.1, 5))
 
 #MÉTODO DE JACOBI PARA SISTEMAS LINEARES
-print('\nResolução de Sistemas Lineares Pelo método de Jacobi')
+print('Resolução de Sistemas Lineares Pelo método de Jacobi')
 
 Sistema em questão:
 (I)     -3.x1+x2+x3=2
@@ -443,9 +487,9 @@ N = 50
 ex1 = mc.Jacobi(A, b, x0)
 print('Matriz resultado')
 print(ex1.calcula(TOL, N))
-print('\nRetornando o erro')
+print('Retornando o erro')
 print(ex1.retorna_erro())
-print('\nRetornando o número de iterações que foi necessário')
+print('Retornando o número de iterações que foi necessário')
 print(ex1.retorna_iteração())
 
 # **** MÉTODO DA INTERPOLAÇÃO POLINOMIAL ****

@@ -9,7 +9,7 @@ Description: Arquivo com os algoritmos mais usados em cálculo numérico
 Homepage: https://github.com/LeandroTeodoroRJ/CalculoComPython
 Stable: Yes
 Version: 1.0
-Last Update: 20.11.20
+Last Update: 27.11.20
 Current: Yes
 Maintainer: leandroteodoro.rj@gmail.com
 Contributor(special thanks): Prof. Eric Amâncio (UNESA) 
@@ -58,6 +58,10 @@ Code Structs Comments:
         retorna_matriz_A(self) :: [void] -> [np.array]  --Retorna a matriz A 
         retorna_matriz_b(self) :: [void] -> [np.array]  --Retorna a matriz b
 
+    CLASSE GAUSSSEIDEL :: <- Ext classe Jacobi 
+        calcula(self, TOL, N) :: TOL[float], N[int] -> [numpy array]  --Calcula o sist. linear onde TOL é a tolerância
+                                                                        e N é o número máximo de iterações pelo Método
+                                                                        de Gauss-Seidel
     CLASSE DADOS
         init(self, ex, ey) :: ex[np.array], ey[np.array] -> [void]  --Cria um objeto a partir de pontos coletados, onde
                                                                       ex: São os ponto do eixo x, e
@@ -310,6 +314,31 @@ class Jacobi(object):
     def retorna_matriz_b(self):
         return self._b
 
+
+#** MÉTODO DE JACOBI **
+class GaussSeidel(Jacobi):
+    def calcula(self, TOL, N):
+        self._n = np.shape(self._A)[0]  # Vai atribuir a incógnita "n" o valor do número de linhas
+        # da matriz A.
+        self._x = np.copy(self._x0)
+        while (self._it < N):
+            self._it = self._it + 1
+            # Iterações de Gauss-Seidel
+            for self._i in np.arange(self._n):
+                self._x[self._i] = self._b[self._i]
+                for self._j in np.concatenate((np.arange(0, self._i), np.arange(self._i + 1, self._n))):
+                    self._x[self._i] -= self._A[self._i, self._j] * self._x[self._j]
+                self._x[self._i] /= self._A[self._i, self._i]
+
+            # tolerância
+            if (np.linalg.norm(self._x - self._x0, np.inf) < TOL):
+                self._E = np.linalg.norm(self._x - self._x0, np.inf)
+                return self._x
+            # preparando nova iteração
+            self._x0 = np.copy(self._x)
+        raise NameError('Número máximo de iterações ultrapassado!!!')
+
+
 #** MÉTODO DE INTERPOLAÇÃO POLINOMIAL **
 class InterpolacaoPolinomial(object):
 
@@ -491,6 +520,16 @@ print('Retornando o erro')
 print(ex1.retorna_erro())
 print('Retornando o número de iterações que foi necessário')
 print(ex1.retorna_iteração())
+
+#MÉTODO DE GAUSS SEIDEL PARA SISTEMAS LINEARES
+A = np.array ([[10,2,1],[1,5,1],[2,3,10]])
+b = np.array ([[7],[-8],[6]])
+x0 = np.array([[1],[1],[1]])
+TOL = 0.01
+N = 50
+ex1 = mc.GaussSeidel(A, b, x0)
+print('Matriz resultado')
+print(ex1.calcula(TOL, N))
 
 # **** MÉTODO DA INTERPOLAÇÃO POLINOMIAL ****
 import numpy as np

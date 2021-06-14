@@ -17,6 +17,7 @@ EXEMPLOS:
 Arredondamento para 2 casas decimais
 >>> from sympy import *
 >>> from sympy.abc import s
+>>> from sympy.core.rules import Transform
 >>> expr = -1.0*(1.232*s**2 + 56.6111111111111*s + 27.7777777777778)/s
 >>> expr
          2                                        

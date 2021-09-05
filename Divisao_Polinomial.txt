@@ -1,0 +1,26 @@
+DIVISÃO POLINOMIAL
+
+>>> from sympy import *
+>>> from sympy.abc import s
+>>> init_printing()
+>>>
+>>> #Numerador
+>>> f = s**3+2*s**2+6*s+7
+>>> pprint(f)
+ 3      2          
+s  + 2.s  + 6.s + 7
+>>>
+>>> #Denominador
+>>> g = s**2 + s + 5
+>>> pprint(g)
+ 2        
+s  + s + 5
+>>> q, r = div(f, g, domain='QQ')
+>>>
+>>> #Quociente
+>>> pprint(q)
+s + 1
+>>>
+>>> #Resto
+>>> pprint(r)
+2

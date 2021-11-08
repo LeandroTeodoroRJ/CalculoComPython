@@ -72,6 +72,8 @@ Code Structs Comments:
         integral(self) :: [void] -> [float]  --Retorna o valor da integral definida dentros dos limites especificados
         get_valores_x(self) :: [void] -> [numpy array]  --Retorna os valores do eixo X
         get_valores_y(self) :: [void] -> [numpy array]  --Retorna os valores do eixo Y
+        legendas(self, titulo, label_x, label_y) :: titulo[string], label_x[string], label_y[string] --> [void]
+                                                    -- Informa as legandas para o gráfico
 
     CLASSE INTERPOLAÇÃO POLINOMIAL
         init(self, objDados) :: objDados[Dados] -> [void]  --Gera um objeto do tipo Interpolação Polinomial
@@ -197,6 +199,9 @@ class Dados(object):
     def __init__(self, ex, ey):
         self._ex = ex
         self._ey = ey
+        self._ltitulo = 'Gráfico da Função'
+        self._leixo_x = ''
+        self._leixo_y = ''
 
     def __del__(self):
         pass
@@ -223,7 +228,9 @@ class Dados(object):
         self.intervalo = self._ex[self._menor:self._maior+1]
         self._eixo_y = self._ey[self._menor:self._maior+1]
         plt.plot(self.intervalo, self._eixo_y)
-        plt.title("Gráfico da Função")
+        plt.title(self._ltitulo)
+        plt.xlabel(self._leixo_x)
+        plt.ylabel(self._leixo_y)
         plt.grid()
         plt.show()
 
@@ -233,6 +240,10 @@ class Dados(object):
     def get_valores_y(self):
         return self._ey
 
+    def legendas(self, titulo, label_x, label_y):
+        self._ltitulo = titulo
+        self._leixo_x = label_x
+        self._leixo_y = label_y
 
 #** MÉTODO DE JACOBI **
 class Jacobi(object):

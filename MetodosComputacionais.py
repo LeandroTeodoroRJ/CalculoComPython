@@ -83,7 +83,16 @@ Code Structs Comments:
         poli_x(self)  :: [void]  -> [symbol]   --Retorna o polinômio simplificado em 'x'
         matriz(self) :: [void] -> [numpy array]  --Retorna matriz da Diferença Dividida
         gera_grafico(self) :: [void] -> [void]  --Gera o gráfico do polinômio 
-        
+
+
+    CLASSE REGRESSÃO LINEAR
+        init(self, objDados) :: objDados[Dados] -> [void]  --Gera um objeto do tipo Regressão Linear
+        regressao(self) :: [void] -> [void]  --Faz os cálculos necessários para a regressão
+        erro(self) :: [void] -> [float]  --Retorna o coeficiente de determinação(erro), varia de 0 a 1
+                                           sendo 1 o ajuste perfeito
+        gera_grafico(self, eixo_x, eixo_y, titulo) :: eixo_x[string], eixo_y[string], titulo[string] -> [void]
+                                         --Gera o gráfico da regressão linear
+
 '''
 
 def help():
@@ -95,6 +104,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sympy import *
 from numpy import linalg
+from functools import reduce
 
 #Variáveis simbólicas
 from sympy.abc import x
@@ -469,6 +479,66 @@ class InterpolacaoPolinomial(object):
         plt.title('Interpolação Diferenças Divididas de Newton')
         plt.show()
 
+# ** MÉTODO DE REGRESSÃO LINEAR **
+class RegressaoLinear(object):
+
+#** Constructor ***
+    def __init__(self, objDados):
+        # Insira os dados de entrada
+        self._xi = objDados.get_valores_x()
+        self._fi = objDados.get_valores_y()
+
+# ** Destructor **
+    def __del__(self):
+        pass
+
+
+# ** Médodos de Classe **
+    def regressao(self):
+        # PROCEDIMIENTO
+        self._n=len(self._xi);  #número de amostras
+        self._sx = reduce(lambda x, y:x+y, self._xi)  #Soma dos valores da lista
+        self._sy = reduce(lambda x, y:x+y, self._fi)
+       
+        #Soma dos quadrados de x
+        self._sx2 = 0
+        for self._i in list(range(len(self._xi))):
+            self._sx2 = self._sx2 + self._xi[self._i]**2
+
+        #Soma dos quadrados de y
+        self._sy2 = 0
+        for self._i in list(range(len(self._fi))):
+            self._sy2 = self._sy2 + self._fi[self._i]**2
+
+        #Soma de x * y
+        self._sxy = 0
+        for self._i in list(range(len(self._fi))):
+            self._sxy = self._sxy + self._xi[self._i]*self._fi[self._i]
+
+        # Cálculo dos coeficientes da equação da reta
+        self._a1=(self._n*self._sxy-self._sx*self._sy)/(self._n*self._sx2-self._sx**2)
+        self._a2=self._sy/self._n-self._a1*self._sx/self._n
+
+    def erro(self):  #Calculo do erro pelo coeficiente de determinação
+        self._r2=((self._n*self._sxy-self._sx*self._sy)/sqrt(self._n*self._sx2-self._sx**2)/sqrt(self._n*self._sy2-self._sy**2))**2
+        return self._r2.evalf()
+        
+    def gera_grafico(self, eixo_x, eixo_y, titulo):
+        # Gráfico
+        self._pfi = list(range(len(self._xi)))
+        for self._i in list(range(len(self._xi))):
+            self._pfi[self._i] = self._a1*self._xi[self._i]+self._a2
+ 
+        plt.plot(self._xi, self._fi, 'o', label='Pontos')
+        plt.plot(self._xi, self._pfi, label='Regressão Linear')
+        plt.legend()
+        plt.xlabel(eixo_x)
+        plt.ylabel(eixo_y)
+        plt.title(titulo)
+        plt.show()
+
+
+# **********************************************************************
 extext = '''
 # EXEMPLO DE USO DA BIBLIOTECA DE MÉTODOS COMPUTACIONAIS
 
@@ -583,6 +653,15 @@ print(type(poli))
 
 #Gera o gráfico do polinimio
 polinomial.gera_grafico()
+
+# **** REGRESSÃO LINEAR ****
+x = np.array([0, 10, 20, 30, 40, 50, 70, 80, 90])
+y = np.array([0, 10, 19, 31, 39, 52, 65, 69, 70])
+pontos = mc.Dados(x, y)
+reg_lin = mc.RegressaoLinear(pontos)
+reg_lin.regressao()
+print(reg_lin.erro())
+reg_lin.gera_grafico('Eixo x', 'Eixo y', 'Regressão Linear')
 
 '''
 

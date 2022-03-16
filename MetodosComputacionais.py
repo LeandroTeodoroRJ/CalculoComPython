@@ -9,7 +9,7 @@ Description: Arquivo com os algoritmos mais usados em cálculo numérico
 Homepage: https://github.com/LeandroTeodoroRJ/CalculoComPython
 Stable: Yes
 Version: 1.0
-Last Update: 27.11.20
+Last Update: 16.03.22
 Current: Yes
 Maintainer: leandroteodoro.rj@gmail.com
 Contributor(special thanks): Prof. Eric Amâncio (UNESA) 
@@ -92,6 +92,8 @@ Code Structs Comments:
                                            sendo 1 o ajuste perfeito
         gera_grafico(self, eixo_x, eixo_y, titulo) :: eixo_x[string], eixo_y[string], titulo[string] -> [void]
                                          --Gera o gráfico da regressão linear
+        coeficientes(self) :: [void] -> coeficientes[list]  --Retorna os coeficientes da equação da reta
+                                                              sendo y=a.x+b e a lista formada por [a, b]
 
 '''
 
@@ -537,6 +539,9 @@ class RegressaoLinear(object):
         plt.title(titulo)
         plt.show()
 
+    def coeficientes(self):
+        return [self._a1, self._a2]
+        
 
 # **********************************************************************
 extext = '''
